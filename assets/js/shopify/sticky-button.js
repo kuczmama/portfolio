@@ -17,7 +17,23 @@
         script.src = url;
         document.getElementsByTagName("head")[0].appendChild(script);
     };
+    var qs = (function(a) {
+        if (a == "") return {};
+        var b = {};
+        for (var i = 0; i < a.length; ++i)
+        {
+            var p=a[i].split('=', 2);
+            if (p.length == 1)
+                b[p[0]] = "";
+            else
+                b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+        }
+        return b;
+    })(window.location.search.substr(1).split('&'));
+
     var myAppJavaScript = function ($) {
+        var shopifyUrl = qs["shop"];
+
         var loadCSS = document.createElement("link");
         loadCSS.type = "text/css";
         loadCSS.rel = "stylesheet";
@@ -303,13 +319,13 @@
             var ReqUrl = 'https://buy-me.makeprosimp.com/app/get-blog-product-detail';
             var DataVal = {
                 method: 'get_blog_product_detail',
-                shop: 'doers-outdoors.myshopify.com',
+                shop: shopifyUrl,
                 blog_url: LastKeyword
             };
             $.get(ReqUrl, DataVal, function (respData) {
                 if (respData.length > 0) {
                     var ProductHandle = respData[0].product_handle;
-                    var ShopifyReqURL = 'https://doers-outdoors.myshopify.com/products/' + ProductHandle + '.json';
+                    var ShopifyReqURL = 'https://' + shopifyUrl + '/products/' + ProductHandle + '.json';
                     /*GET SHOPIFY PRODUCT DETAIL START*/
                     $.getJSON(ShopifyReqURL, function (ShopifyProdRespData) {
                         var ShopifyProductName = ShopifyProdRespData.product.title;
@@ -319,7 +335,7 @@
                         var ShopifyProductVariantsImages = ShopifyProdRespData.product.images;
                         var ShopifyProductHandle = ShopifyProdRespData.product.handle;
                         $('#buy-me').find('.buy-me-title-a').html(ShopifyProductName);
-                        $('#buy-me').find('.buy-me-title-a').attr('href', 'https://doers-outdoors.myshopify.com/products/' + ProductHandle);
+                        $('#buy-me').find('.buy-me-title-a').attr('href', shopifyUrl + '/products/' + ProductHandle);
                         /*BIND IMAGE START*/
                         var imgLoader = $('#buy-me').find('.buy-me-thumb').attr('src', ShopifyProductImageSrc);
                         imgLoader.on('load', function () {
@@ -448,7 +464,7 @@
                         /*BIND FIRST PRICE END*/
                         /* Social Media Start */
                         if (0) {
-                            var ShareURL = 'https://doers-outdoors.myshopify.com/products/' + ShopifyProductHandle;
+                            var ShareURL = 'https://' + shopifyUrl + '/products/' + ShopifyProductHandle;
                             $('#buy-me .buy-me-share.fac-link').attr('href', 'https://www.facebook.com/sharer.php?u=' + ShareURL);
                             $('#buy-me .buy-me-share.twi-link').attr('href', 'https://twitter.com/share?url=' + ShareURL);
                             $('#buy-me .buy-me-share.ggl-link').attr('href', 'https://plus.google.com/share?url=' + ShareURL);
@@ -554,8 +570,8 @@
                 var ProductQuantity = $('#buy-me').find('#buy-me-quantity').val();
                 var ProductPrice = $('#buy-me').find('#productSelect option:selected').attr('data-price');
                 var ProductTitle = $('#buy-me').find('.buy-me-title-a').attr('href');
-                var CartProductAddURL = 'https://doers-outdoors.myshopify.com/cart/add.js';
-                var CartURL = 'https://doers-outdoors.myshopify.com/cart';
+                var CartProductAddURL = 'https://' + shopifyUrl +'/cart/add.js';
+                var CartURL = 'https://' + shopifyUrl + '/cart';
                 $.post(CartProductAddURL, {id: SelectedProductId, quantity: ProductQuantity}, function (CartResp) {
                     var URL = ProductTitle.split('/')[ProductTitle.split('/').length - 1], prod_price = 0;
                     URL = URL.split('?')[0];
@@ -1134,7 +1150,7 @@
                 $('#buy-me').find('.buy-me-price').attr('data-org_price', productPrice);
                 /* Social Media Start */
                 if (0) {
-                    var ShareURL = 'https://doers-outdoors.myshopify.com/products/' + data.product['handle'];
+                    var ShareURL = 'https://' + shopifyUrl + '/products/' + data.product['handle'];
                     $('#buy-me .buy-me-share.fac-link').attr('href', 'https://www.facebook.com/sharer.php?u=' + ShareURL);
                     $('#buy-me .buy-me-share.twi-link').attr('href', 'https://twitter.com/share?url=' + ShareURL);
                     $('#buy-me .buy-me-share.ggl-link').attr('href', 'https://plus.google.com/share?url=' + ShareURL);
@@ -1458,7 +1474,7 @@
         }
         $(".buy-me-share").click(function () { /* Analytics for Social Button Start */
             var t = Math.round(+new Date() / 1000);
-            var data = "?method=social-analytics&id=" + $(this).data("id") + "&shop=doers-outdoors.myshopify.com&t=" + t;
+            var data = "?method=social-analytics&id=" + $(this).data("id") + "&shop=" +  shopifyUrl +"&t=" + t;
             $.get("https://buy-me.makeprosimp.com/app/analytics" + data, function () {
             });
             /* Analytics for Social Button End */
