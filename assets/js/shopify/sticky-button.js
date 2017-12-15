@@ -22,7 +22,7 @@
         loadCSS.type = "text/css";
         loadCSS.rel = "stylesheet";
         loadCSS.media = "all";
-        loadCSS.href = "https://buy-me.makeprosimp.com/app/css/app.min.css?v=136";
+        loadCSS.href = "http://www.mkucz.com/assets/css/shopify/sticky-button.css";
         document.getElementsByTagName("head")[0].appendChild(loadCSS);
         $("body").append("<style type='text/css'>#buy-me { bottom: 0;} #buy-me .buy-me-quantity { display: none;} #buy-me .buy-me-btn [type='submit'], #buy-me .buy-me-btn button[name='add'], #buy-me .buy-me-btn button{ -o-animation: big-small 2s infinite linear;-ms-animation: big-small 2s infinite linear;-moz-animation: big-small 2s infinite linear;-webkit-animation: big-small 2s infinite linear;animation: big-small 2s infinite linear;} #buy-me .buy-me-second-btn { display : none !important} .bm-quick-buy-button { background-color:#eeeeee;} .bm-quick-buy-button.bm-top-right .bm-quick-buy { color:#000000;} .bm-quick-buy-button.bm-top-right .bm-quick-buy-button-variants li { color:#000000;background-color:#eeeeee;} @media screen and (max-width: 467px){#buy-me { bottom: 0; top: auto;} #buy-me .buy-me-variants { display: none !important;} #buy-me .buy-me-quantity { display: none;} } </style>");
         $("body").append('<div id="buy-me"><div class="buy-me-thumb-img"><img class="buy-me-thumb" src="https://buy-me.makeprosimp.com/images/no-image.jpg"></div><div class="buy-me-title"><a class="buy-me-title-a buy-me-scroll-top"></a><div class="buy-me-reviews-stars"></div><div class="buy-me-social-media"></div></div><div class="buy-me-additional"><div class="buy-me-second-btn mb-hide" id="buy-me-second-btn-div"><button type="button" name="test" id="buy-me-second-btn">Second</button></div><div class="buy-me-btn" id="buy-me-add-to-cart-div"><button type="submit" name="add" id="buy-me-add-to-cart-btn">Add to Cart</button></div><div class="buy-me-price"></div><div class="buy-me-compare-price"></div><div class="buy-me-quantity"><input type="number" id="buy-me-quantity" min="1" value="1" /></div><div class="buy-me-variants"></div></div><div class="buy-me-second-btn adjust mb-only" id="buy-me-second-btn-div"></div></div>');
@@ -54,23 +54,6 @@
             $('#buy-me-cart').addClass('prev-adj-quick-cart');
         }
         /*PRE CODE END*/
-        var analyticForQuickAdd = function (url, prod_price) {
-            try {
-                if ($('#admin_bar_iframe').index() == -1 && window.location.href.indexOf('?bm_preview=1') == -1) {
-                    var URL = url.split('/')[url.split('/').length - 1];
-                    URL = URL.split('?')[0];
-                    /* Analytics for Buy Me Button Start */
-                    var t = Math.round(+new Date() / 1000);
-                    var device = '1';
-                    if ($(window).width() < 768) device = '0';
-                    var data = '?method=buy-me-analytics&handle=' + URL + '&shop=meal-prep-mastery.myshopify.com&device=' + device + '&t=' + t + '&pprice=' + prod_price;
-                    $.get('https://buy-me.makeprosimp.com/app/analytics' + data, function () {
-                    });
-                    /* Analytics for Buy Me Button End */
-                }
-            } catch (e) {
-            }
-        };
         /*REMOVE CART ON CHECKOUT AND THANK YOU PAGES START*/
         if (window.location.href.toLowerCase().indexOf('/checkout.shopify.com/') > -1 || window.location.href.toLowerCase().indexOf('/thank_you') > -1) {
             $('#buy-me-cart').remove();
@@ -172,10 +155,6 @@
                             ProductPrice = 0;
                         }
                         $.post(CartProductAddURL, {id: SelectedVariantId, quantity: 1}, function (cartResp) {
-                            try {
-                                analyticForQuickAdd($(objThis).attr('data-handle'), ProductPrice);
-                            } catch (e) {
-                            }
                             $(objThis).find('.bm-quick-buy').fadeOut(500, function () {
                                 $(objThis).find('.bm-quick-buy').removeClass('bm-fa-fonts bm-refresh bm-spin').addClass('bm-fa-fonts bm-check');
                                 $(objThis).find('.bm-quick-buy').fadeIn(1000, function () {
@@ -232,10 +211,6 @@
             $(this).parent().prev('.bm-handle-url').find('.bm-quick-buy').removeClass('bm-close').addClass('bm-refresh bm-spin');
             $(this).parent().hide();
             $.post(CartProductAddURL, {id: SelectedVariantId, quantity: 1}, function (cartResp) {
-                try {
-                    analyticForQuickAdd($(objThis).parent().prev('.bm-handle-url').attr('data-handle'), ProductPrice);
-                } catch (e) {
-                }
                 var bm_quick_buy = $(objThis).parent().prev('.bm-handle-url').find('.bm-quick-buy');
                 bm_quick_buy.fadeOut(500, function () {
                     bm_quick_buy.removeClass('bm-fa-fonts bm-refresh bm-spin').addClass('bm-fa-fonts bm-check');
@@ -328,13 +303,13 @@
             var ReqUrl = 'https://buy-me.makeprosimp.com/app/get-blog-product-detail';
             var DataVal = {
                 method: 'get_blog_product_detail',
-                shop: 'meal-prep-mastery.myshopify.com',
+                shop: 'doers-outdoors.myshopify.com',
                 blog_url: LastKeyword
             };
             $.get(ReqUrl, DataVal, function (respData) {
                 if (respData.length > 0) {
                     var ProductHandle = respData[0].product_handle;
-                    var ShopifyReqURL = 'https://meal-prep-mastery.myshopify.com/products/' + ProductHandle + '.json';
+                    var ShopifyReqURL = 'https://doers-outdoors.myshopify.com/products/' + ProductHandle + '.json';
                     /*GET SHOPIFY PRODUCT DETAIL START*/
                     $.getJSON(ShopifyReqURL, function (ShopifyProdRespData) {
                         var ShopifyProductName = ShopifyProdRespData.product.title;
@@ -344,7 +319,7 @@
                         var ShopifyProductVariantsImages = ShopifyProdRespData.product.images;
                         var ShopifyProductHandle = ShopifyProdRespData.product.handle;
                         $('#buy-me').find('.buy-me-title-a').html(ShopifyProductName);
-                        $('#buy-me').find('.buy-me-title-a').attr('href', 'https://meal-prep-mastery.myshopify.com/products/' + ProductHandle);
+                        $('#buy-me').find('.buy-me-title-a').attr('href', 'https://doers-outdoors.myshopify.com/products/' + ProductHandle);
                         /*BIND IMAGE START*/
                         var imgLoader = $('#buy-me').find('.buy-me-thumb').attr('src', ShopifyProductImageSrc);
                         imgLoader.on('load', function () {
@@ -473,7 +448,7 @@
                         /*BIND FIRST PRICE END*/
                         /* Social Media Start */
                         if (0) {
-                            var ShareURL = 'https://meal-prep-mastery.myshopify.com/products/' + ShopifyProductHandle;
+                            var ShareURL = 'https://doers-outdoors.myshopify.com/products/' + ShopifyProductHandle;
                             $('#buy-me .buy-me-share.fac-link').attr('href', 'https://www.facebook.com/sharer.php?u=' + ShareURL);
                             $('#buy-me .buy-me-share.twi-link').attr('href', 'https://twitter.com/share?url=' + ShareURL);
                             $('#buy-me .buy-me-share.ggl-link').attr('href', 'https://plus.google.com/share?url=' + ShareURL);
@@ -579,8 +554,8 @@
                 var ProductQuantity = $('#buy-me').find('#buy-me-quantity').val();
                 var ProductPrice = $('#buy-me').find('#productSelect option:selected').attr('data-price');
                 var ProductTitle = $('#buy-me').find('.buy-me-title-a').attr('href');
-                var CartProductAddURL = 'https://meal-prep-mastery.myshopify.com/cart/add.js';
-                var CartURL = 'https://meal-prep-mastery.myshopify.com/cart';
+                var CartProductAddURL = 'https://doers-outdoors.myshopify.com/cart/add.js';
+                var CartURL = 'https://doers-outdoors.myshopify.com/cart';
                 $.post(CartProductAddURL, {id: SelectedProductId, quantity: ProductQuantity}, function (CartResp) {
                     var URL = ProductTitle.split('/')[ProductTitle.split('/').length - 1], prod_price = 0;
                     URL = URL.split('?')[0];
@@ -588,10 +563,6 @@
                         prod_price = parseFloat(ProductPrice);
                     } catch (e) {
                         prod_price = 0;
-                    }
-                    try {
-                        analyticForQuickAdd(URL, prod_price);
-                    } catch (e) {
                     }
                     window.location.href = CartURL;
                 }, 'json').fail(function (respFail) {
@@ -1163,7 +1134,7 @@
                 $('#buy-me').find('.buy-me-price').attr('data-org_price', productPrice);
                 /* Social Media Start */
                 if (0) {
-                    var ShareURL = 'https://meal-prep-mastery.myshopify.com/products/' + data.product['handle'];
+                    var ShareURL = 'https://doers-outdoors.myshopify.com/products/' + data.product['handle'];
                     $('#buy-me .buy-me-share.fac-link').attr('href', 'https://www.facebook.com/sharer.php?u=' + ShareURL);
                     $('#buy-me .buy-me-share.twi-link').attr('href', 'https://twitter.com/share?url=' + ShareURL);
                     $('#buy-me .buy-me-share.ggl-link').attr('href', 'https://plus.google.com/share?url=' + ShareURL);
@@ -1193,10 +1164,6 @@
                         prod_price = parseFloat($('#buy-me .buy-me-price').attr('data-org_price'));
                     } catch (e) {
                         prod_price = 0;
-                    }
-                    try {
-                        analyticForQuickAdd(URL, prod_price);
-                    } catch (e) {
                     }
                 } catch (e) {
                 }
@@ -1491,7 +1458,7 @@
         }
         $(".buy-me-share").click(function () { /* Analytics for Social Button Start */
             var t = Math.round(+new Date() / 1000);
-            var data = "?method=social-analytics&id=" + $(this).data("id") + "&shop=meal-prep-mastery.myshopify.com&t=" + t;
+            var data = "?method=social-analytics&id=" + $(this).data("id") + "&shop=doers-outdoors.myshopify.com&t=" + t;
             $.get("https://buy-me.makeprosimp.com/app/analytics" + data, function () {
             });
             /* Analytics for Social Button End */
