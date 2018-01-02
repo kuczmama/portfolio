@@ -24,7 +24,7 @@ var animateCSSDSN = "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/an
     }
 
     function state(productJSON, barOptions) {
-        $("head").append('<link rel="stylesheet" href="https://mkucz.com/assets/css/better-sticky-button.css" type="text/css" />'), 0 == $("link[href*='animate.min.css']").length && 0 == $("link[href*='animate.css']").length && $("head").append('<link rel="stylesheet" href="' + animateCSSDSN + '?v0.1" type="text/css" />');
+        $("head").append('<link rel="stylesheet" href="https://www.mkucz.com/assets/css/shopify/better-sticky-button.css" type="text/css" />'), 0 == $("link[href*='animate.min.css']").length && 0 == $("link[href*='animate.css']").length && $("head").append('<link rel="stylesheet" href="' + animateCSSDSN + '?v0.1" type="text/css" />');
         var n = productJSON.product.id,
             r = productJSON.product;
         return S = {

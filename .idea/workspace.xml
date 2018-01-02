@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dd914498-6425-4041-bfac-ea2adb78d594" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/assets/css/shopify/better-sticky-button.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/js/shopify/new-sticky-button.js" afterPath="$PROJECT_DIR$/assets/js/shopify/new-sticky-button.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -31,8 +30,8 @@
       <file leaf-file-name="new-sticky-button.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/assets/js/shopify/new-sticky-button.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="26" column="55" lean-forward="true" selection-start-line="26" selection-start-column="55" selection-end-line="26" selection-end-column="108" />
+            <state relative-caret-position="289">
+              <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -381,12 +380,12 @@
       <updated>1513294380771</updated>
       <workItem from="1513294382451" duration="4686000" />
       <workItem from="1514766976520" duration="6280000" />
-      <workItem from="1514848469682" duration="6957000" />
+      <workItem from="1514848469682" duration="7131000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17923000" />
+    <option name="totallyTimeSpent" value="18097000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -550,8 +549,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/js/shopify/new-sticky-button.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="55" lean-forward="true" selection-start-line="26" selection-start-column="55" selection-end-line="26" selection-end-column="108" />
+        <state relative-caret-position="289">
+          <caret line="20" column="0" lean-forward="true" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding />
         </state>
       </provider>
