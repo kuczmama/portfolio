@@ -46,7 +46,7 @@ if (function(jQuery) {
         function setupEnv(shopifyProduct, shopSettings){
 
             //Append stylesheets and scripts
-            jQuery("head").append('<link rel="stylesheet" href=https://www.mkucz.com/assets/css/shopify/better-sticky-button.css" type="text/css" />');
+            jQuery("head").append('<link rel="stylesheet" href="https://www.mkucz.com/assets/css/shopify/better-sticky-button.css" type="text/css" />');
 
             if(jQuery("link[href*='animate.min.css']").length == 0 && jQuery("link[href*='animate.css']").length == 0){
                 jQuery("head").append('<link rel="stylesheet" href="' + animateCSSDSN + '?v0.1" type="text/css" />');

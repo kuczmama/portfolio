@@ -45,8 +45,8 @@
       <file leaf-file-name="better-sticky-button.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/assets/js/shopify/better-sticky-button.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
-              <caret line="48" column="63" lean-forward="true" selection-start-line="48" selection-start-column="63" selection-end-line="48" selection-end-column="128" />
+            <state relative-caret-position="199">
+              <caret line="48" column="64" lean-forward="false" selection-start-line="48" selection-start-column="64" selection-end-line="48" selection-end-column="64" />
               <folding />
             </state>
           </provider>
@@ -406,12 +406,12 @@
       <updated>1513294380771</updated>
       <workItem from="1513294382451" duration="4686000" />
       <workItem from="1514766976520" duration="6280000" />
-      <workItem from="1514848469682" duration="9643000" />
+      <workItem from="1514848469682" duration="9713000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20609000" />
+    <option name="totallyTimeSpent" value="20679000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
@@ -583,8 +583,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/js/shopify/better-sticky-button.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="48" column="63" lean-forward="true" selection-start-line="48" selection-start-column="63" selection-end-line="48" selection-end-column="128" />
+        <state relative-caret-position="199">
+          <caret line="48" column="64" lean-forward="false" selection-start-line="48" selection-start-column="64" selection-end-line="48" selection-end-column="64" />
           <folding />
         </state>
       </provider>
