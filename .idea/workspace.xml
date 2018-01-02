@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dd914498-6425-4041-bfac-ea2adb78d594" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/js/shopify/new-sticky-button.js" afterPath="$PROJECT_DIR$/assets/js/shopify/new-sticky-button.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -31,8 +30,8 @@
       <file leaf-file-name="new-sticky-button.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/assets/js/shopify/new-sticky-button.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="36" column="54" lean-forward="true" selection-start-line="36" selection-start-column="54" selection-end-line="36" selection-end-column="54" />
+            <state relative-caret-position="200">
+              <caret line="108" column="13" lean-forward="false" selection-start-line="108" selection-start-column="13" selection-end-line="108" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -85,6 +84,13 @@
       <find>g</find>
       <find>g(</find>
       <find>g()</find>
+      <find>barOn</find>
+      <find>buyBar</find>
+      <find>widgetClosed</find>
+      <find>direct_to_checkout</find>
+      <find>directToCheckout</find>
+      <find>for</find>
+      <find>g =</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -337,12 +343,12 @@
       <updated>1513294380771</updated>
       <workItem from="1513294382451" duration="4686000" />
       <workItem from="1514766976520" duration="6280000" />
-      <workItem from="1514848469682" duration="3963000" />
+      <workItem from="1514848469682" duration="5559000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14929000" />
+    <option name="totallyTimeSpent" value="16525000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="723" extended-state="6" />
@@ -496,8 +502,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/assets/js/shopify/new-sticky-button.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="36" column="54" lean-forward="true" selection-start-line="36" selection-start-column="54" selection-end-line="36" selection-end-column="54" />
+        <state relative-caret-position="200">
+          <caret line="108" column="13" lean-forward="false" selection-start-line="108" selection-start-column="13" selection-end-line="108" selection-end-column="13" />
           <folding />
         </state>
       </provider>
