@@ -1,5 +1,6 @@
 var animateCSSDSN = "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css",
-    stickyJSCDN = "https://cdnjs.cloudflare.com/ajax/libs/jquery.sticky/1.0.4/jquery.sticky.min.js", widgetClosed = !1,
+    stickyJSCDN = "https://cdnjs.cloudflare.com/ajax/libs/jquery.sticky/1.0.4/jquery.sticky.min.js",
+    widgetClosed = !1,
     barOn = !1;
 !function ($) {
     function isProductPage() {
@@ -25,7 +26,8 @@ var animateCSSDSN = "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/an
 
     function state(productJSON, barOptions) {
         $("head").append('<link rel="stylesheet" href="' + serverUrl() + "/sticky-buy-now-button.css?" + 10 * Math.random() + '" type="text/css" />'), 0 == $("link[href*='animate.min.css']").length && 0 == $("link[href*='animate.css']").length && $("head").append('<link rel="stylesheet" href="' + animateCSSDSN + '?v0.1" type="text/css" />');
-        var n = productJSON.product.id, r = productJSON.product;
+        var n = productJSON.product.id,
+            r = productJSON.product;
         return S = {
             shopURL: window.location.hostname,
             onMobile: isOnMobile(),
@@ -90,9 +92,9 @@ var animateCSSDSN = "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/an
         }, "addtocart" == S.mobileSettings.revealAt && (S.mobileSettings.revealAt = $(S.buyButtonSelector).position().top), "addtocart" == S.desktopSettings.revealAt && (S.desktopSettings.revealAt = $(S.buyButtonSelector).position().top), "" != S.customCSS && $("head").append("<style>" + S.customCSS + "</style>"), S
     }
 
-    function getProductVariant(t) {
+    function getProductVariant(state) {
         var e = location.search.match(/variant=([0-9]+)/);
-        return null != e ? e[1] : t.productVariants[0].id
+        return null != e ? e[1] : state.productVariants[0].id
     }
 
     function s(e) {
@@ -103,12 +105,15 @@ var animateCSSDSN = "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/an
     }
 
     function u(state) {
-        var i = $(state.variantSelector).clone(), o = "", a = [], n = s(state);
+        var i = $(state.variantSelector).clone(),
+            o = "",
+            a = [],
+            n = s(state);
         return i.find("[type=radio]").length > 0 ? ($(state.variantSelector).each(function (e, i) {
             var r = "";
             $(i).attr("data-option") && (r = " data-option='" + $(i).attr("data-option") + "' "), $(i).attr("data-index") && (r += " data-index='" + $(i).attr("data-index") + "' "), $(i).attr("name") && (r += " name='" + $(i).attr("name") + "' "), o = $("<select " + r + "></select>"), $(i).find("input[type=radio]").each(function (e, i) {
-                if (r = "", a = "", $(i).attr("value") == n)var a = "SELECTED";
-                if ($(i).prop("checked"))var a = "SELECTED";
+                if (r = "", a = "", $(i).attr("value") == n) var a = "SELECTED";
+                if ($(i).prop("checked")) var a = "SELECTED";
                 $(i).attr("data-option") && (r = " data-option='" + $(i).attr("data-option") + "' "), $(i).attr("data-index") && (r += " data-index='" + $(i).attr("data-index") + "' "), o.append("<option " + r + " value='" + $(i).attr("value") + "' " + a + ">" + $(i).attr("value") + "</option>")
             }), a.push(o)
         }), i = a.reverse()) : $(state.variantSelector).each(function (e) {
@@ -116,20 +121,20 @@ var animateCSSDSN = "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/an
         }), i
     }
 
-    function d(e) {
-        $(e.variantSelector).find("[type=radio]").length > 0 ? ($(".fixedBuyBarVariants select").change(function () {
-            var i = $(e.variantSelector).find("input[data-option=" + $(this).data("option") + "], input[data-index=" + $(this).data("index") + "], input[name='" + ($(this).attr("name") ? $(this).attr("name").replace(/(:|\.|\[|\]|,|=|@)/g, "\\$1") : "") + "']"),
+    function d(state) {
+        $(state.variantSelector).find("[type=radio]").length > 0 ? ($(".fixedBuyBarVariants select").change(function () {
+            var i = $(state.variantSelector).find("input[data-option=" + $(this).data("option") + "], input[data-index=" + $(this).data("index") + "], input[name='" + ($(this).attr("name") ? $(this).attr("name").replace(/(:|\.|\[|\]|,|=|@)/g, "\\$1") : "") + "']"),
                 o = $(this).val();
             $(i).each(function (e, i) {
                 o == $(i).val() && ($(i).prop("checked", !0), $(i).change())
-            }), y(e), l(e)
+            }), applyCustomBarOptions(state), l(state)
         }), $("body").on("change", ".radio-wrapper fieldset input,  .product__available-sizes:first input, .product__available-colors:first input", function () {
             var i = $(".fixedBuyBarVariants select[data-option=" + $(this).data("option") + "], .fixedBuyBarVariants select[data-index=" + $(this).data("index") + "], .fixedBuyBarVariants select[name='" + ($(this).attr("name") ? $(this).attr("name").replace(/(:|\.|\[|\]|,|=|@)/g, "\\$1") : "") + "']");
-            $(i).val($(this).val()), y(e), l(e)
+            $(i).val($(this).val()), applyCustomBarOptions(state), l(state)
         })) : ($(".fixedBuyBarVariants select").change(function () {
-            $("#" + $(this).attr("id")).val($(this).val()), $("#" + $(this).attr("id")).change(), y(e), l(e)
-        }), $("body").on("change", e.variantSelector + ", " + e.variantSelector + " input, " + e.variantSelector + " select", function () {
-            "radio" == $("#" + $(this).attr("id")).attr("type") && $("#" + $(this).attr("id")).prop("checked") && $(".fixedBuyBarVariants #" + $(this).attr("id")).prop("checked", !0), $(".fixedBuyBarVariants #" + $(this).attr("id")).val($(this).val()), y(e), l(e)
+            $("#" + $(this).attr("id")).val($(this).val()), $("#" + $(this).attr("id")).change(), applyCustomBarOptions(state), l(state)
+        }), $("body").on("change", state.variantSelector + ", " + state.variantSelector + " input, " + state.variantSelector + " select", function () {
+            "radio" == $("#" + $(this).attr("id")).attr("type") && $("#" + $(this).attr("id")).prop("checked") && $(".fixedBuyBarVariants #" + $(this).attr("id")).prop("checked", !0), $(".fixedBuyBarVariants #" + $(this).attr("id")).val($(this).val()), applyCustomBarOptions(state), l(state)
         }))
     }
 
@@ -138,13 +143,16 @@ var animateCSSDSN = "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/an
     }
 
     function l(e) {
-        for (var o, a, n = e.productTitle, s = 0, u = e.productVariants.length; u > s; s++)e.productVariants[s].id == getProductVariant(e) && (o = c(e.currencySymbol, e.productVariants[s].price), "Default Title" != e.productVariants[s].title && (n = e.productTitle + " - " + e.productVariants[s].title), n = e.productTitle + " - " + e.productVariants[s].title, null == e.productVariants[s].compare_at_price || "" == e.productVariants[s].compare_at_price || e.productVariants[s].price > e.productVariants[s].compare_at_price ? a = "" : (a = c(e.currencySymbol, e.productVariants[s].compare_at_price), "shopluvit.myshopify.com" == shopUrl() && (a = "")));
+        for (var o, a, n = e.productTitle, s = 0, u = e.productVariants.length; u > s; s++) e.productVariants[s].id == getProductVariant(e) && (o = c(e.currencySymbol, e.productVariants[s].price), "Default Title" != e.productVariants[s].title && (n = e.productTitle + " - " + e.productVariants[s].title), n = e.productTitle + " - " + e.productVariants[s].title, null == e.productVariants[s].compare_at_price || "" == e.productVariants[s].compare_at_price || e.productVariants[s].price > e.productVariants[s].compare_at_price ? a = "" : (a = c(e.currencySymbol, e.productVariants[s].compare_at_price), "shopluvit.myshopify.com" == shopUrl() && (a = "")));
         "hobbieshut.myshopify.com" == shopUrl() ? ($(".fixedBuyBarPrice").html($(e.priceSelector).html()), $(e.originalPriceSelector) ? $(".fixedBuyBarOriginalPrice").html($(e.originalPriceSelector).html()) : $(".fixedBuyBarOriginalPrice").html("")) : ($(".fixedBuyBarPrice").html(o), $(".fixedBuyBarOriginalPrice").html(a)), $(".fixedBuyBarProductTitle a:first").text(n)
     }
 
-    function p(e) {
-        var i = 1;
-        return $(e.formSelector + " input[name=quantity]").length > 0 && (i = $(e.formSelector + " input[name=quantity]").val()), "https://" + e.shopURL + "/cart/" + getProductVariant(e) + ":" + i
+    function cartUrlWithQuantity(state) {
+        var quantity = 1;
+        if ($(state.formSelector + " input[name=quantity]").length > 0) {
+            quantity = $(state.formSelector + " input[name=quantity]").val();
+        }
+        return "https://" + state.shopURL + "/cart/" + getProductVariant(state) + ":" + quantity
     }
 
     function delayFor(time) {
@@ -153,11 +161,14 @@ var animateCSSDSN = "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/an
         })
     }
 
-    function y(e) {
-        1 == e.directToCheckout && $(".fixedBuyBarButton input, .fixedBuyBarButton button").click(function () {
-            window.location.replace(p(e))
-        }), delayFor(250).then(function () {
-            $(".fixedBuyBarButton input, .fixedBuyBarButton button").prop("disabled", $(e.buyButtonSelector).prop("disabled")), $(e.buyButtonSelector).prop("disabled") ? ($(".fixedBuyBarButton input, .fixedBuyBarButton button").text(e.soldOutText), $(".fixedBuyBarButton input, .fixedBuyBarButton button").val(e.soldOutText)) : ($(".fixedBuyBarButton input, .fixedBuyBarButton button").text(e.buyButtonText), $(".fixedBuyBarButton input, .fixedBuyBarButton button").val(e.buyButtonText)), $(e.buyButtonSelector).prop("disabled") ? $(".fixedBuyBarButton input, .fixedBuyBarButton button").css("cursor", "default") : $(".fixedBuyBarButton input, .fixedBuyBarButton button").css("cursor", "pointer"), e.useCustomStyles || ($(".fixedBuyBarButton input, .fixedBuyBarButton button").css("background-color", $(e.buyButtonSelector).css("background-color")), $(".fixedBuyBarButton input, .fixedBuyBarButton button").css("color", $(e.buyButtonSelector).css("color")), $(".fixedBuyBarButton input, .fixedBuyBarButton button").css("border", $(e.buyButtonSelector).css("border")))
+    function applyCustomBarOptions(state) {
+        if (1 == state.directToCheckout) {
+            $(".fixedBuyBarButton input, .fixedBuyBarButton button").click(function () {
+                window.location.replace(cartUrlWithQuantity(state))
+            })
+        }
+        delayFor(250).then(function () {
+            $(".fixedBuyBarButton input, .fixedBuyBarButton button").prop("disabled", $(state.buyButtonSelector).prop("disabled")), $(state.buyButtonSelector).prop("disabled") ? ($(".fixedBuyBarButton input, .fixedBuyBarButton button").text(state.soldOutText), $(".fixedBuyBarButton input, .fixedBuyBarButton button").val(state.soldOutText)) : ($(".fixedBuyBarButton input, .fixedBuyBarButton button").text(state.buyButtonText), $(".fixedBuyBarButton input, .fixedBuyBarButton button").val(state.buyButtonText)), $(state.buyButtonSelector).prop("disabled") ? $(".fixedBuyBarButton input, .fixedBuyBarButton button").css("cursor", "default") : $(".fixedBuyBarButton input, .fixedBuyBarButton button").css("cursor", "pointer"), state.useCustomStyles || ($(".fixedBuyBarButton input, .fixedBuyBarButton button").css("background-color", $(state.buyButtonSelector).css("background-color")), $(".fixedBuyBarButton input, .fixedBuyBarButton button").css("color", $(state.buyButtonSelector).css("color")), $(".fixedBuyBarButton input, .fixedBuyBarButton button").css("border", $(state.buyButtonSelector).css("border")))
         })
     }
 
@@ -165,24 +176,27 @@ var animateCSSDSN = "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/an
         var o = state.buyButtonText;
         $(state.buyButtonSelector).prop("disabled") && (o = state.soldOutText);
         var n = $(state.buyButtonSelector).clone().text(o),
-            s = 0 != $(state.reviewStarsSelector).length ? $(state.reviewStarsSelector).html() : "", l = "", p = "",
+            s = 0 != $(state.reviewStarsSelector).length ? $(state.reviewStarsSelector).html() : "",
+            l = "",
+            p = "",
             B = state.productTitle;
         n.is("input") && n.val(o);
-        for (var f = 0, b = state.productVariants.length; b > f; f++)state.productVariants[f].id == getProductVariant(state) && (null != state.productVariants[f].price && (l = c(state.currencySymbol, state.productVariants[f].price)), null != state.productVariants[f].compare_at_price && parseInt(state.productVariants[f].price) < parseInt(state.productVariants[f].compare_at_price) && (p = c(state.currencySymbol, state.productVariants[f].compare_at_price), "shopluvit.myshopify.com" == shopUrl() && (p = "")), "Default Title" != state.productVariants[f].title && "Default" != state.productVariants[f].title && (B = state.productTitle + " - " + state.productVariants[f].title, B = B.replace(/<(?:.|\n)*?>/gm, "")));
-        var h = !1, g = [];
-        if (state.productVariants.length > 1 && (state.onMobile && "full" == state.mobileSettings.mobileDesign || !state.onMobile && state.desktopSettings.showVariants || !state.onMobile && "right" == state.desktopSettings.barPosition) && (g = u(state), h = !0), isOnMobile())switch (state.mobileSettings.mobileDesign) {
-            case"mobile":
+        for (var f = 0, b = state.productVariants.length; b > f; f++) state.productVariants[f].id == getProductVariant(state) && (null != state.productVariants[f].price && (l = c(state.currencySymbol, state.productVariants[f].price)), null != state.productVariants[f].compare_at_price && parseInt(state.productVariants[f].price) < parseInt(state.productVariants[f].compare_at_price) && (p = c(state.currencySymbol, state.productVariants[f].compare_at_price), "shopluvit.myshopify.com" == shopUrl() && (p = "")), "Default Title" != state.productVariants[f].title && "Default" != state.productVariants[f].title && (B = state.productTitle + " - " + state.productVariants[f].title, B = B.replace(/<(?:.|\n)*?>/gm, "")));
+        var h = !1,
+            g = [];
+        if (state.productVariants.length > 1 && (state.onMobile && "full" == state.mobileSettings.mobileDesign || !state.onMobile && state.desktopSettings.showVariants || !state.onMobile && "right" == state.desktopSettings.barPosition) && (g = u(state), h = !0), isOnMobile()) switch (state.mobileSettings.mobileDesign) {
+            case "mobile":
                 $("body").append("<div id='fixedBuyBar' class='mobile'><div class='fixedBuyBarButton'></div></div>");
                 break;
-            case"full":
+            case "full":
                 $("body").append("<div id='fixedBuyBar' class='full'><div class='fixedBuyBarVariants'></div><div class='fixedBuyBarButton'></div><div class='fixedBuyBarConfirm'>Product Added!</div><div class='fixedBuyBarPrice'>" + l + "</div><div class='fixedBuyBarOriginalPrice'>" + p + "</div></div>")
-        } else"right" == state.desktopSettings.barPosition || "left" == state.desktopSettings.barPosition ? $("body").append("<div id='fixedBuyBar' class='" + state.desktopSettings.barPosition + "'><div class='fixedBuyBarThumbClose'><a href='#'>[x]</a></div><div class='fixedBuyBarThumb'><img src='" + state.productImage + "'></div><div class='fixedBuyBarProductTitle'><a href='#'>" + B + "</a><div class='fixedBuyBarReviews'>" + s + "</div></div><div class='fixedBuyBarVariants'><div class='fixedBuyBarPrice'>" + l + "</div></div><div class='fixedBuyBarButton'></div><div class='fixedBuyBarConfirm'>Product Added!</div></div>") : $("body").append("<div id='fixedBuyBar' class='desktop'><div class='fixedBuyBarThumb'><img src='" + state.productImage + "'></div><div class='fixedBuyBarProductTitle'>" + B + "<div class='fixedBuyBarReviews'>" + s + "</div></div><div class='fixedBuyBarButton'></div><div class='fixedBuyBarConfirm'>Product Added!</div><div class='fixedBuyBarPrice'>" + l + "</div><div class='fixedBuyBarOriginalPrice'>" + p + "</div><div class='fixedBuyBarVariants'></div></div>");
+        } else "right" == state.desktopSettings.barPosition || "left" == state.desktopSettings.barPosition ? $("body").append("<div id='fixedBuyBar' class='" + state.desktopSettings.barPosition + "'><div class='fixedBuyBarThumbClose'><a href='#'>[x]</a></div><div class='fixedBuyBarThumb'><img src='" + state.productImage + "'></div><div class='fixedBuyBarProductTitle'><a href='#'>" + B + "</a><div class='fixedBuyBarReviews'>" + s + "</div></div><div class='fixedBuyBarVariants'><div class='fixedBuyBarPrice'>" + l + "</div></div><div class='fixedBuyBarButton'></div><div class='fixedBuyBarConfirm'>Product Added!</div></div>") : $("body").append("<div id='fixedBuyBar' class='desktop'><div class='fixedBuyBarThumb'><img src='" + state.productImage + "'></div><div class='fixedBuyBarProductTitle'>" + B + "<div class='fixedBuyBarReviews'>" + s + "</div></div><div class='fixedBuyBarButton'></div><div class='fixedBuyBarConfirm'>Product Added!</div><div class='fixedBuyBarPrice'>" + l + "</div><div class='fixedBuyBarOriginalPrice'>" + p + "</div><div class='fixedBuyBarVariants'></div></div>");
         if ($(".fixedBuyBarButton").html(n), state.desktopSettings.showCompareAt || isOnMobile() && "full" == state.mobileSettings.mobileDesign || $("#fixedBuyBar.desktop div.fixedBuyBarOriginalPrice").remove(), (state.desktopSettings.showQuantity && !isOnMobile() || isOnMobile() && "full" == state.mobileSettings.mobileDesign && state.mobileSettings.showQuantity || !isOnMobile() && "right" == state.desktopSettings.barPosition) && (0 != $(state.formSelector + " input[name=quantity]").length ? "shopluvit.myshopify.com" == shopUrl() ? $("#fixedBuyBar").append("<div class='fixedBuyBarQuantity'>" + $(state.formSelector + " input[name=quantity]").clone().prop("outerHTML") + "</div>") : $("div.fixedBuyBarVariants").prepend($(state.formSelector + " input[name=quantity]:first").clone()) : ($(state.formSelector).append('<input type="hidden" id="fixedBuyBarQuantity" name="quantity" value="1" min="1">'), "shopluvit.myshopify.com" == shopUrl() ? $("#fixedBuyBar").append('<div class="fixedBuyBarQuantity"><input type="number" id="fixedBuyBarQuantity" name="quantity" value="1" min="1"></div>') : $("div.fixedBuyBarVariants").prepend('<input type="number" id="fixedBuyBarQuantity" name="quantity" value="1" min="1">')), $("#fixedBuyBar input[name=quantity]").change(function () {
-                $(state.formSelector + " input[name=quantity]").val($(this).val()), y(state)
+                $(state.formSelector + " input[name=quantity]").val($(this).val()), applyCustomBarOptions(state)
             }), $(state.formSelector + " input[name=quantity]").change(function () {
-                $("#fixedBuyBar input[name=quantity]").val($(this).val()), y(state)
+                $("#fixedBuyBar input[name=quantity]").val($(this).val()), applyCustomBarOptions(state)
             }), $(state.formSelector + " button.adjust").click(function () {
-                $("#fixedBuyBar input[name=quantity]").val($(state.formSelector + " input[name=quantity]").val()), y(state)
+                $("#fixedBuyBar input[name=quantity]").val($(state.formSelector + " input[name=quantity]").val()), applyCustomBarOptions(state)
             })), "pulse" == state.animationType ? $(".fixedBuyBarButton input, .fixedBuyBarButton button").addClass("pulse-button") : "shake" == state.animationType && setInterval(function () {
                     $(".fixedBuyBarButton input, .fixedBuyBarButton button").hasClass("shake-button") ? $(".fixedBuyBarButton input, .fixedBuyBarButton button").removeClass("shake-button") : $(".fixedBuyBarButton input, .fixedBuyBarButton button").addClass("shake-button")
                 }, 3e3), "" == state.desktopSettings.paddingLeft || isOnMobile() || "right" == state.desktopSettings.barPosition || "left" == state.desktopSettings.barPosition || $("#fixedBuyBar").css("padding-left", state.desktopSettings.paddingLeft), "" == state.desktopSettings.paddingRight || isOnMobile() || "right" == state.desktopSettings.barPosition || "left" == state.desktopSettings.barPosition || $("div.fixedBuyBarButton").css("margin-right", state.desktopSettings.paddingRight), isOnMobile() ? $("#fixedBuyBar").css("opacity", state.mobileSettings.mobileOpacity) : $("#fixedBuyBar").css("opacity", state.desktopSettings.desktopOpacity), "" != state.styleButtonBackgroundColor && state.useCustomStyles && $("#fixedBuyBar .fixedBuyBarButton input, #fixedBuyBar .fixedBuyBarButton button").css("background-color", state.styleButtonBackgroundColor), "" != state.styleButtonTextColor && state.useCustomStyles && $("#fixedBuyBar .fixedBuyBarButton input, #fixedBuyBar .fixedBuyBarButton button").css("color", state.styleButtonTextColor), "" != state.styleBarBackgroundColor && state.useCustomStyles && $("#fixedBuyBar").css("background-color", state.styleBarBackgroundColor), "" != state.styleBarTextColor && state.useCustomStyles && $("#fixedBuyBar .fixedBuyBarProductTitle a, #fixedBuyBar .fixedBuyBarReviews i, div.fixedBuyBarOriginalPrice, div.fixedBuyBarPrice").css("color", state.styleBarTextColor), state.desktopSettings.paymentOptions && !state.onMobile && $(".fixedBuyBarButton").append('<img src="https://cdn.shopify.com/s/files/1/1482/2104/t/2/assets/payment-logos.png?12256004131392044624" class="payment-logo" />'), $(".fixedBuyBarButton button, .fixedBuyBarButton input, " + state.buyButtonSelector).click(function () {
@@ -190,10 +204,11 @@ var animateCSSDSN = "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/an
             }), $(".fixedBuyBarButton button, .fixedBuyBarButton input").click(function () {
                 var o;
                 1 == state.directToCheckout ? (o = "Sticky Buy Button: Customer sent straight to checkout", "undefined" != typeof fbq && fbq("track", "InitiateCheckout")) : (o = "Sticky Buy Button: Product added to cart", "undefined" != typeof fbq && fbq("track", "AddToCart")), window.ga && ga.loaded && ga("send", "event", "Sticky Buy Button", o, state.productTitle, Math.round(state.productPrice)), "somethingyouwant1.myshopify.com" == shopUrl() || "ddcrocheting.myshopify.com" == shopUrl() ? $(".product-single__cart-submit-wrapper button#AddToCart").trigger("click") : "nutracelle.myshopify.com" == shopUrl() || "frank-wilder.myshopify.com" == shopUrl() ? $(state.buyButtonSelector).trigger("click") : $(state.formSelector).submit()
-            }), 1 == state.directToCheckout && y(state), !isOnMobile() && h && g.length > 0 || isOnMobile() && g.length > 0 && "full" == state.mobileSettings.mobileDesign) {
-            for (var f = 0, b = g.length; b > f; f++)$(".fixedBuyBarVariants").append(g[f]);
+            }), 1 == state.directToCheckout && applyCustomBarOptions(state), !isOnMobile() && h && g.length > 0 || isOnMobile() && g.length > 0 && "full" == state.mobileSettings.mobileDesign) {
+            for (var f = 0, b = g.length; b > f; f++) $(".fixedBuyBarVariants").append(g[f]);
             if ("full" == state.mobileSettings.mobileDesign) {
-                if (state.mobileSettings.showQuantity && "shopluvit.myshopify.com" != shopUrl())var x = 75; else var x = 10;
+                if (state.mobileSettings.showQuantity && "shopluvit.myshopify.com" != shopUrl()) var x = 75;
+                else var x = 10;
                 var v = $(window).width() / g.length - x / g.length - 10;
                 $("#fixedBuyBar.full select").outerWidth(v)
             }
@@ -202,15 +217,20 @@ var animateCSSDSN = "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/an
     }
 
     function m(e) {
-        if (e.length)if (isOnMobile())var i = 48; else var i = $(".fixedBuyBarVariants select").outerHeight(); else var i = $(".fixedBuyBarButton input, .fixedBuyBarButton button, fixedBuyBarButton a").outerHeight();
+        if (e.length)
+            if (isOnMobile()) var i = 48;
+            else var i = $(".fixedBuyBarVariants select").outerHeight();
+        else var i = $(".fixedBuyBarButton input, .fixedBuyBarButton button, fixedBuyBarButton a").outerHeight();
         $("#fixedBuyBar input[name=quantity]").outerHeight(i)
     }
 
     function b() {
         var e = $("*").filter(function () {
-            return "fixed" === $(this).css("position") && "0px" === $(this).css("top") && $(this).is(":visible") && $(this).width() / $("body").width() === 1 && "fixedBuyBar" != $(this).attr("id") && "visible" == $(this).css("visibility") && $(this).css("opacity") > 0 ? this : void 0
-        }), i = 0;
-        if (e.length > 0)for (var o = 0, a = e.length; a > o; o++)$(e[o]).outerHeight() > i && (i = $(e[o]).outerHeight());
+                return "fixed" === $(this).css("position") && "0px" === $(this).css("top") && $(this).is(":visible") && $(this).width() / $("body").width() === 1 && "fixedBuyBar" != $(this).attr("id") && "visible" == $(this).css("visibility") && $(this).css("opacity") > 0 ? this : void 0
+            }),
+            i = 0;
+        if (e.length > 0)
+            for (var o = 0, a = e.length; a > o; o++) $(e[o]).outerHeight() > i && (i = $(e[o]).outerHeight());
         return i
     }
 
@@ -218,8 +238,8 @@ var animateCSSDSN = "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/an
         return window.innerHeight / 2 - $("#fixedBuyBar").outerHeight() / 2
     }
 
-    function g(state, i) {
-        0 == widgetClosed && (state.onMobile ? ("top" == state.mobileSettings.barPosition ? $("#fixedBuyBar").css("top", b(state) + state.mobileSettings.positionOffset + "px") : $("#fixedBuyBar").css("bottom", state.mobileSettings.positionOffset + "px"), $("#fixedBuyBar").css("z-index", state.mobileSettings.zindex)) : ("bottom" == state.desktopSettings.barPosition ? $("#fixedBuyBar").css("bottom", state.desktopSettings.positionOffset + "px") : "top" == state.desktopSettings.barPosition ? $("#fixedBuyBar").css("top", b(state) + state.desktopSettings.positionOffset + "px") : $("#fixedBuyBar").css("top", calculateSpacing()), $("#fixedBuyBar").css("z-index", state.desktopSettings.zindex)), (0 == state.desktopSettings.revealAt && !state.onMobile || 0 == state.mobileSettings.revealAt && state.onMobile) && $("#fixedBuyBar").css("display", "block"), (i >= state.desktopSettings.revealAt && !state.onMobile || i >= state.mobileSettings.revealAt && state.onMobile && "none" == $("#fixedBuyBar").css("display")) && $("#fixedBuyBar").fadeIn(), (i < state.desktopSettings.revealAt && !state.onMobile || i < state.mobileSettings.revealAt && state.onMobile && "block" == $("#fixedBuyBar").css("display")) && $("#fixedBuyBar").fadeOut())
+    function g(state, scrollTop) {
+        0 == widgetClosed && (state.onMobile ? ("top" == state.mobileSettings.barPosition ? $("#fixedBuyBar").css("top", b(state) + state.mobileSettings.positionOffset + "px") : $("#fixedBuyBar").css("bottom", state.mobileSettings.positionOffset + "px"), $("#fixedBuyBar").css("z-index", state.mobileSettings.zindex)) : ("bottom" == state.desktopSettings.barPosition ? $("#fixedBuyBar").css("bottom", state.desktopSettings.positionOffset + "px") : "top" == state.desktopSettings.barPosition ? $("#fixedBuyBar").css("top", b(state) + state.desktopSettings.positionOffset + "px") : $("#fixedBuyBar").css("top", calculateSpacing()), $("#fixedBuyBar").css("z-index", state.desktopSettings.zindex)), (0 == state.desktopSettings.revealAt && !state.onMobile || 0 == state.mobileSettings.revealAt && state.onMobile) && $("#fixedBuyBar").css("display", "block"), (scrollTop >= state.desktopSettings.revealAt && !state.onMobile || scrollTop >= state.mobileSettings.revealAt && state.onMobile && "none" == $("#fixedBuyBar").css("display")) && $("#fixedBuyBar").fadeIn(), (scrollTop < state.desktopSettings.revealAt && !state.onMobile || scrollTop < state.mobileSettings.revealAt && state.onMobile && "block" == $("#fixedBuyBar").css("display")) && $("#fixedBuyBar").fadeOut())
     }
 
     function randomNum(min, max) {
@@ -235,7 +255,9 @@ var animateCSSDSN = "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/an
         $.getJSON(locationWithRandomParam(), function (t) {
             productJSON = t
         }).done(function () {
-            $.getJSON(serverUrl() + "/bar/show", {shopify_domain: shopUrl()}, function (t) {
+            $.getJSON(serverUrl() + "/bar/show", {
+                shopify_domain: shopUrl()
+            }, function (t) {
                 barOptions = t
             }).done(function () {
                 null != barOptions && barOptions.app_enabled && (isOnMobile() && barOptions.mobile_enabled || !isOnMobile() && barOptions.desktop_enabled) && (S = state(productJSON, barOptions), f(S), g(S, 0), $("body").on({
@@ -263,7 +285,9 @@ var animateCSSDSN = "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/an
                             bottomSpacing: 0,
                             getWidthFrom: "body",
                             responsiveWidth: !0
-                        }) : "right" == S.desktopSettings.barPosition || "left" == S.desktopSettings.barPosition ? $("#fixedBuyBar").sticky({topSpacing: calculateSpacing()}) : $("#fixedBuyBar").sticky({
+                        }) : "right" == S.desktopSettings.barPosition || "left" == S.desktopSettings.barPosition ? $("#fixedBuyBar").sticky({
+                            topSpacing: calculateSpacing()
+                        }) : $("#fixedBuyBar").sticky({
                             topSpacing: 0,
                             getWidthFrom: "body",
                             responsiveWidth: !0
