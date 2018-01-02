@@ -14,7 +14,7 @@ if (function(jQuery) {
         function getShopifyDomain(){
             var page_scripts = document.getElementsByTagName("script"), sourceURL="", shopify_domain="";
             for(var i=0;i< page_scripts.length;i++){
-                if ((sourceURL = page_scripts[i].getAttribute("src")) && (sourceURL = sourceURL.match(/^(.*)sticky-buy-now-button.js(\?\s*(.+))?\s*/))) {
+                if ((sourceURL = page_scripts[i].getAttribute("src")) && (sourceURL = sourceURL.match(/^(.*)better-sticky-button.js(\?\s*(.+))?\s*/))) {
                     shopify_domain = sourceURL[3].match(/shop=(.+).myshopify.com/)[1];
                     break;
                 }
