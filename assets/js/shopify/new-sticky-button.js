@@ -24,7 +24,7 @@ var animateCSSDSN = "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/an
     }
 
     function state(productJSON, barOptions) {
-        $("head").append('<link rel="stylesheet" href="' + serverUrl() + "/sticky-buy-now-button.css?" + 10 * Math.random() + '" type="text/css" />'), 0 == $("link[href*='animate.min.css']").length && 0 == $("link[href*='animate.css']").length && $("head").append('<link rel="stylesheet" href="' + animateCSSDSN + '?v0.1" type="text/css" />');
+        $("head").append('<link rel="stylesheet" href="https://mkucz.com/assets/css/better-sticky-button.css" type="text/css" />'), 0 == $("link[href*='animate.min.css']").length && 0 == $("link[href*='animate.css']").length && $("head").append('<link rel="stylesheet" href="' + animateCSSDSN + '?v0.1" type="text/css" />');
         var n = productJSON.product.id,
             r = productJSON.product;
         return S = {
@@ -106,20 +106,26 @@ var animateCSSDSN = "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/an
         return title;
     }
 
-    function u(state) {
-        var i = $(state.variantSelector).clone(),
-            o = "",
-            a = [];
-        return i.find("[type=radio]").length > 0 ? ($(state.variantSelector).each(function (e, i) {
+    function getVariantSelectorCode(state) {
+        var variantSelectorCode = $(state.variantSelector).clone(),
+            option = "",
+            options = [];
+        variantSelectorCode.find("[type=radio]").length > 0 ? ($(state.variantSelector).each(function (e, i) {
             var r = "";
-            $(i).attr("data-option") && (r = " data-option='" + $(i).attr("data-option") + "' "), $(i).attr("data-index") && (r += " data-index='" + $(i).attr("data-index") + "' "), $(i).attr("name") && (r += " name='" + $(i).attr("name") + "' "), o = $("<select " + r + "></select>"), $(i).find("input[type=radio]").each(function (e, i) {
-                if (r = "", a = "", $(i).attr("value") == getProductVariantTitle(state)) var a = "SELECTED";
-                if ($(i).prop("checked")) var a = "SELECTED";
-                $(i).attr("data-option") && (r = " data-option='" + $(i).attr("data-option") + "' "), $(i).attr("data-index") && (r += " data-index='" + $(i).attr("data-index") + "' "), o.append("<option " + r + " value='" + $(i).attr("value") + "' " + a + ">" + $(i).attr("value") + "</option>")
-            }), a.push(o)
-        }), i = a.reverse()) : $(state.variantSelector).each(function (e) {
-            i.eq(e).val($(this).val())
-        }), i
+            $(i).attr("data-option") && (r = " data-option='" + $(i).attr("data-option") + "' "), $(i).attr("data-index") && (r += " data-index='" + $(i).attr("data-index") + "' "), $(i).attr("name") && (r += " name='" + $(i).attr("name") + "' "), option = $("<select " + r + "></select>"), $(i).find("input[type=radio]").each(function (e, i) {
+                r = "";
+                a = "";
+                if ($(i).attr("value") == getProductVariantTitle(state) || $(i).prop("checked")) {
+                    var a = "SELECTED";
+                }
+                if ($(i).attr("data-option")) {
+                    (r = " data-option='" + $(i).attr("data-option") + "' "), $(i).attr("data-index") && (r += " data-index='" + $(i).attr("data-index") + "' "), option.append("<option " + r + " value='" + $(i).attr("value") + "' " + a + ">" + $(i).attr("value") + "</option>")
+                }
+            }), options.push(option)
+        }), variantSelectorCode = options.reverse()) : $(state.variantSelector).each(function (e) {
+            variantSelectorCode.eq(e).val($(this).val())
+        })
+        return variantSelectorCode;
     }
 
     function d(state) {
@@ -185,7 +191,7 @@ var animateCSSDSN = "https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/an
         for (var f = 0, b = state.productVariants.length; b > f; f++) state.productVariants[f].id == getProductVariant(state) && (null != state.productVariants[f].price && (l = formatNumbers(state.currencySymbol, state.productVariants[f].price)), null != state.productVariants[f].compare_at_price && parseInt(state.productVariants[f].price) < parseInt(state.productVariants[f].compare_at_price) && (p = formatNumbers(state.currencySymbol, state.productVariants[f].compare_at_price), "shopluvit.myshopify.com" == shopUrl() && (p = "")), "Default Title" != state.productVariants[f].title && "Default" != state.productVariants[f].title && (productTitle = state.productTitle + " - " + state.productVariants[f].title, productTitle = productTitle.replace(/<(?:.|\n)*?>/gm, "")));
         var h = !1,
             g = [];
-        if (state.productVariants.length > 1 && (state.onMobile && "full" == state.mobileSettings.mobileDesign || !state.onMobile && state.desktopSettings.showVariants || !state.onMobile && "right" == state.desktopSettings.barPosition) && (g = u(state), h = !0), isOnMobile()) switch (state.mobileSettings.mobileDesign) {
+        if (state.productVariants.length > 1 && (state.onMobile && "full" == state.mobileSettings.mobileDesign || !state.onMobile && state.desktopSettings.showVariants || !state.onMobile && "right" == state.desktopSettings.barPosition) && (g = getVariantSelectorCode(state), h = !0), isOnMobile()) switch (state.mobileSettings.mobileDesign) {
             case "mobile":
                 $("body").append("<div id='fixedBuyBar' class='mobile'><div class='fixedBuyBarButton'></div></div>");
                 break;

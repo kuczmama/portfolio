@@ -1,0 +1,487 @@
+#fixedBuyBar-sticky-wrapper{
+    position:absolute;
+}
+
+#fixedBuyBar{
+    position: fixed !important;
+    width:100%!important;
+    z-index: 9;
+}
+#fixedBuyBar.full {
+    border-top:1px solid #F1F1F1;
+    background:white;
+    height: 120px;
+    opacity:.95;
+    left:0px;
+}
+.full #fixedBuyBarQuantity{
+    margin-left:10px;
+    width:45px !important;
+}
+
+.full .fixedBuyBarButton{
+    display: inline-block;
+    float: right;
+    margin:5px 10px;
+}
+
+.full .fixedBuyBarVariants input, .full .fixedBuyBarVariants select{
+    margin:10px 5px 5px 5px;
+    display:inline-block;
+}
+
+.full .fixedBuyBarVariants select:last-child{
+    margin-right:10px;
+}
+
+.full .fixedBuyBarOriginalPrice{
+    margin-top:0px;
+    font-size: 18px;
+    line-height: 54px;
+}
+.full .fixedBuyBarPrice{
+    margin-top:0px;
+    font-size: 24px;
+    line-height: 54px;
+}
+
+#fixedBuyBar.desktop {
+    background: white;
+    opacity: .95;
+    /*box-shadow: 0 1px 3px #ccc;
+    border-bottom: 1px solid #CCC;*/
+    height: 56px; /* 55px; */
+    left: 0;
+
+    padding-left: 5px;
+    /*padding-right: 150px;*/
+    display: none;
+}
+
+#fixedBuyBar.right, #fixedBuyBar.left {
+    background: white;
+    opacity: .95;
+    width:150px !important;
+    top:200px;
+    display: none;
+    padding:10px;
+    border:1px solid rgb(238, 238, 238);
+}
+#fixedBuyBar.right{
+    right: 0;
+}
+#fixedBuyBar.left {
+    left: 0;
+}
+.fixedBuyBarThumbClose{
+    display: block;
+    position: absolute;
+    margin-top: -7px;
+    opacity: .5;
+    font-size: 14px;
+}
+
+#fixedBuyBar.mobile {
+    border-top: 1px solid #ddd;
+}
+#fixedBuyBar.mobile .fixedBuyBarButton{
+    margin:0px !important;
+}
+
+#fixedBuyBar.mobile .fixedBuyBarButton, #fixedBuyBar.mobile .fixedBuyBarButton input, #fixedBuyBar.mobile .fixedBuyBarButton submit, #fixedBuyBar.mobile .fixedBuyBarButton button{
+    width:100%!important;
+}
+
+#fixedBuyBar:before{
+    content: ' ';
+    height: 7px;
+    display: block;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: -7px;
+    background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiâ€¦gd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+    background-size: 100%;
+    background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, rgba(0,0,0,0.0875)),color-stop(100%, rgba(0,0,0,0)));
+    background-image: -moz-linear-gradient(top, rgba(0,0,0,0.0875),rgba(0,0,0,0));
+    background-image: -webkit-linear-gradient(top, rgba(0,0,0,0.0875),rgba(0,0,0,0));
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.0875),rgba(0,0,0,0));
+}
+
+.fixedBuyBarThumb{
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.left .fixedBuyBarThumb, .right .fixedBuyBarThumb{
+    display: block;
+    vertical-align: middle;
+    cursor: pointer;
+    width:100%;
+}
+.left .fixedBuyBarThumb img, .right .fixedBuyBarThumb img{
+    max-height: 70px;
+    max-width: 70px;
+    display: block;
+    margin: 4px auto;
+}
+
+.fixedBuyBarThumb img{
+    max-height: 48px;
+    max-width: 48px;
+    display: block;
+    margin: 4px 10px;
+}
+
+.fixedBuyBarProductTitle {
+    display: inline-block;
+    vertical-align: middle;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 30%;
+}
+.right .fixedBuyBarProductTitle,
+.left .fixedBuyBarProductTitle{
+    display:block;
+    width:100%;
+    max-width:100%;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.fixedBuyBarProductTitle a {
+    font-size: 16px;
+}
+
+.desktop .fixedBuyBarButton, .mobile .fixedBuyBarButton{
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+
+    align-items: center;
+    margin-right: 5px;
+    float: right;
+    height:100%;
+}
+.right .fixedBuyBarButton, .left .fixedBuyBarButton{
+    display: block;
+    float: right;
+    width:100%;
+}
+.desktop .payment-logo{
+    display: inline-block;
+    float: right;
+    margin-left: 10px;
+}
+.right .payment-logo, .left .payment-logo{
+    display: block;
+    margin: 10px auto 0;
+}
+#fixedBuyBar.right .fixedBuyBarButton button, #fixedBuyBar.right .fixedBuyBarButton input,
+#fixedBuyBar.left .fixedBuyBarButton button, #fixedBuyBar.left .fixedBuyBarButton input{
+    display:block;
+    width:100%;
+    margin-top:5px !important;
+}
+.fixedBuyBarCheckoutButton{
+    margin-top: 5px;
+    margin-bottom: 4px;
+    margin-right: 10px;
+    float: right;
+}
+
+.desktop .fixedBuyBarButton button, .desktop .fixedBuyBarButton input,
+.mobile .fixedBuyBarButton button, .mobile .fixedBuyBarButton input,
+.right .fixedBuyBarButton button, .right .fixedBuyBarButton input,
+.left .fixedBuyBarButton button, .left .fixedBuyBarButton input{
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.fixedBuyBarPrice, .fixedBuyBarConfirm {
+    float: right;
+    margin-top: 18px;
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.right .fixedBuyBarPrice, .left .fixedBuyBarPrice, .fixedBuyBarConfirm {
+    float: right;
+    margin-top: 18px;
+    margin-right: 10px;
+    font-size: 16px;
+    display:inline-block;
+}
+
+.fixedBuyBarConfirm {
+    display: none;
+}
+
+
+.fixedBuyBarOriginalPrice {
+    float: right;
+    margin-top: 20px;
+    margin-right: 5px;
+    text-decoration: line-through;
+    color: #999;
+    font-size: 14px;
+}
+
+.fixedBuyBarReviews {
+    font-size: 12px;
+}
+
+.fixedBuyBarReviews .yotpo-icon-empty-star:before {
+    content: "\e61b";
+}
+
+.fixedBuyBarReviews .yotpo-icon-default-star:before, .fixedBuyBarReviews .yotpo-icon-star:before {
+    content: "\e60e";
+}
+.fixedBuyBarReviews .yotpo-icon, .fixedBuyBarReviews .yotpo-icon:after, .fixedBuyBarReviews .yotpo-icon:before {
+    font-family: "yotpo-widget-font" !important;
+}
+.desktop .fixedBuyBarVariants {
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -webkit-box-align: center;
+
+    align-items: center;
+    float: right;
+    height:100%;
+}
+
+.right .fixedBuyBarVariants, .left .fixedBuyBarVariants {
+    display: inline-block;
+    float: right;
+}
+
+.desktop .fixedBuyBarVariants select, .desktop .fixedBuyBarVariants input {
+    margin: 0 8px 0 0;
+    float: right;
+    width: 100px;
+}
+.right .fixedBuyBarVariants select, .right .fixedBuyBarVariants input,
+.left .fixedBuyBarVariants select, .left .fixedBuyBarVariants input{
+    margin: 5px 0px;
+    float: right;
+    width: 100%;
+}
+
+.desktop .fixedBuyBarVariants select[id^=product-select] {
+    margin-top: 12px;
+}
+
+.right .fixedBuyBarVariants select[id^=product-select],
+.left .fixedBuyBarVariants select[id^=product-select]{
+    margin-top: 12px;
+}
+
+.desktop .fixedBuyBarVariants input[name=quantity]{
+    width:60px !important;
+}
+.right .fixedBuyBarVariants input[name=quantity],
+.left .fixedBuyBarVariants input[name=quantity]{
+    width: 47px !important;
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+}
+.right .fixedBuyBarProductTitle,
+.left .fixedBuyBarProductTitle{
+    text-align:center;
+}
+
+.pulse-button {
+    position: relative;
+    box-shadow: 0 0 0 0 rgba(232, 76, 61, 0.7);
+    cursor: pointer;
+    -webkit-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+    -moz-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+    -ms-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+    animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+}
+.pulse-button:hover
+{
+    -webkit-animation: none;-moz-animation: none;-ms-animation: none;animation: none;
+}
+
+@-webkit-keyframes pulse {
+    0% {
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1)
+    }
+
+    50% {
+        -webkit-transform: scale3d(1.05,1.05,1.05);
+        transform: scale3d(1.05,1.05,1.05)
+    }
+
+    to {
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1)
+    }
+}
+
+@keyframes pulse {
+    0% {
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1)
+    }
+
+    50% {
+        -webkit-transform: scale3d(1.05,1.05,1.05);
+        transform: scale3d(1.05,1.05,1.05)
+    }
+
+    to {
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1)
+    }
+}
+
+.pulse {
+    -webkit-animation-name: pulse;
+    animation-name: pulse
+}
+
+.shake-button {
+    -webkit-animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    -moz-animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    -ms-animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+@-webkit-keyframes shake {
+    10%, 90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+
+    20%, 80% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    30%, 50%, 70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+
+    40%, 60% {
+        transform: translate3d(4px, 0, 0);
+    }
+}
+@-moz-keyframes shake {
+    10%, 90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+
+    20%, 80% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    30%, 50%, 70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+
+    40%, 60% {
+        transform: translate3d(4px, 0, 0);
+    }
+}
+@-ms-keyframes shake {
+    10%, 90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+
+    20%, 80% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    30%, 50%, 70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+
+    40%, 60% {
+        transform: translate3d(4px, 0, 0);
+    }
+}
+@keyframes shake {
+    10%, 90% {
+        transform: translate3d(-1px, 0, 0);
+    }
+
+    20%, 80% {
+        transform: translate3d(2px, 0, 0);
+    }
+
+    30%, 50%, 70% {
+        transform: translate3d(-4px, 0, 0);
+    }
+
+    40%, 60% {
+        transform: translate3d(4px, 0, 0);
+    }
+}
+
+@media (max-width: 768px) {
+    #fixedBuyBar.mobile {
+        /*bottom: 0;
+        top: initial !important;*/
+    }
+    .fixedBuyBarButton {
+        margin-right: 0px;
+    }
+    #fixedBuyBar {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+    .fixedBuyBarProductTitle {
+        max-width: calc(100% - 350px);
+    }
+    .fixedBuyBarReviews {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    .desktop .fixedBuyBarVariants {
+        margin:7px 10px;
+        width: 100%;
+        display:none;
+        visibility:hidden;
+    }
+    .desktop .fixedBuyBarVariants select, .desktop .fixedBuyBarVariants input {
+        margin: 0 !important;
+    }
+}
+
+@media (max-width: 320px) {
+    .fixedBuyBarOriginalPrice {
+        display: none;
+    }
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+ */
+
