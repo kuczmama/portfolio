@@ -1,3 +1,803 @@
----
-layout: default
----
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Mark Kuczmarski — Software Engineer &amp; Founder</title>
+  <meta name="description" content="Portfolio of Mark Kuczmarski, software engineer, founder, and GenAI community organizer.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #f6f7f9;
+      color: #29313d;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    a {
+      color: #2457d6;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    .container {
+      margin: 0 auto;
+      max-width: 1040px;
+      padding: 0 2rem;
+      width: 100%;
+    }
+
+    .row::after {
+      clear: both;
+      content: "";
+      display: table;
+    }
+
+    .columns {
+      width: 100%;
+    }
+
+    #particles-js {
+      align-items: center;
+      background: radial-gradient(circle at top, #2e4057 0, #1a222c 58%);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      min-height: 48vh;
+      padding: 4rem 2rem;
+      position: relative;
+      text-align: center;
+    }
+
+    .content h1 {
+      margin-bottom: 2rem;
+    }
+
+    .site-title,
+    .site-description {
+      display: block;
+    }
+
+    .site-title {
+      font-size: clamp(3.4rem, 7vw, 6.5rem);
+      letter-spacing: -.05em;
+      line-height: 1;
+    }
+
+    .site-description {
+      color: #cbd5e1;
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      font-weight: 400;
+      margin-top: 1rem;
+    }
+
+    .hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .hero-links a {
+      border: 1px solid rgba(255, 255, 255, .45);
+      border-radius: 999px;
+      color: #fff;
+      padding: .7rem 1.3rem;
+      text-decoration: none;
+    }
+
+    .hero-links a:hover,
+    .hero-links a:focus {
+      background: #fff;
+      color: #1a222c;
+    }
+
+    .down {
+      bottom: 2rem;
+      color: #fff;
+      font-size: 2.5rem;
+      left: 50%;
+      position: absolute;
+      text-decoration: none;
+      transform: translateX(-50%);
+    }
+
+    #about {
+      background: #fff;
+      padding: 2.5rem 0 1.5rem;
+    }
+
+    .section-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .section-nav a {
+      border: 1px solid #d9dee5;
+      border-radius: 999px;
+      color: #1a222c;
+      padding: .7rem 1.4rem;
+      text-decoration: none;
+      transition: background-color .2s ease, color .2s ease;
+    }
+
+    .section-nav a:hover,
+    .section-nav a:focus {
+      background: #1a222c;
+      color: #fff;
+    }
+
+    #work_history,
+    #personal_projects {
+      padding-top: 3.5rem;
+    }
+
+    #work_history > .row:first-child,
+    #personal_projects > .row:first-child {
+      margin-bottom: 1.5rem;
+    }
+
+    #work_history > .row:not(:first-child) {
+      background: #fff;
+      border: 1px solid #e1e5ea;
+      border-radius: 12px;
+      box-sizing: border-box;
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: 82px minmax(0, 1fr);
+      margin-bottom: 1.4rem;
+      padding: 1.7rem;
+      box-shadow: 0 8px 24px rgba(26, 34, 44, .05);
+    }
+
+    #work_history img {
+      display: block;
+      width: auto !important;
+      height: auto !important;
+      max-width: 76px;
+      max-height: 70px;
+      margin: .4rem auto 0;
+      object-fit: contain;
+    }
+
+    #work_history .work-history-logo--square {
+      max-width: 76px;
+      max-height: 76px;
+    }
+
+    #work_history .columns {
+      float: none;
+      margin: 0;
+      width: auto;
+    }
+
+    #work_history big {
+      color: #1a222c;
+      font-size: 1.25em;
+    }
+
+    #work_history i {
+      color: #4b5664;
+      display: block;
+      margin-top: .4rem;
+    }
+
+    #work_history ul {
+      font-size: .9rem;
+      margin-bottom: 0;
+      padding-left: 2rem;
+      list-style-position: outside;
+    }
+
+    #work_history p {
+      font-size: .95rem;
+      margin-bottom: .8rem;
+    }
+
+    .work-history-details {
+      color: #66717f;
+      margin-top: -1.5rem;
+    }
+
+    #personal_projects {
+      border-top: 1px solid #dfe3e8;
+      margin-top: 3rem;
+    }
+
+    .section-intro {
+      color: #66717f;
+      max-width: 720px;
+    }
+
+    .project-entry {
+      background: #fff;
+      border: 1px solid #e1e5ea;
+      border-radius: 12px;
+      box-sizing: border-box;
+      display: grid;
+      gap: 1.4rem;
+      grid-template-columns: 72px minmax(0, 1fr);
+      margin-bottom: 1.4rem;
+      padding: 1.7rem;
+    }
+
+    .project-entry h3 {
+      color: #1a222c;
+      font-size: 1.35rem;
+      margin: .6rem 0 .6rem;
+    }
+
+    .project-entry p {
+      font-size: .95rem;
+      margin-bottom: .7rem;
+    }
+
+    .project-image {
+      text-align: center;
+    }
+
+    .project-image img {
+      border-radius: 8px;
+      height: auto;
+      max-height: 72px;
+      max-width: 100%;
+      object-fit: contain;
+    }
+
+    .project-status {
+      background: #eef1f4;
+      border-radius: 999px;
+      color: #5b6673;
+      display: inline-block;
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+      padding: .25rem .8rem;
+      text-transform: uppercase;
+    }
+
+    .project-status--live {
+      background: #e7f6ed;
+      color: #176b3a;
+    }
+
+    .project-links a {
+      font-weight: 600;
+    }
+
+    .project-entry .columns {
+      float: none;
+      margin: 0;
+      width: auto;
+    }
+
+    .footer {
+      background: #1a222c;
+      color: #fff;
+      margin-top: 7rem;
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+
+    .footer p {
+      margin: 0;
+    }
+
+    @media only screen and (min-width: 550px) {
+      .columns {
+        float: left;
+        margin-left: 4%;
+      }
+
+      .columns:first-child {
+        margin-left: 0;
+      }
+
+      .three.columns {
+        width: 22%;
+      }
+
+      .six.columns {
+        width: 48%;
+      }
+
+      .nine.columns {
+        width: 74%;
+      }
+
+      #work_history > .row:not(:first-child),
+      .project-entry {
+        align-items: start;
+      }
+    }
+
+    @media only screen and (min-width: 800px) {
+      #work_history,
+      #personal_projects {
+        display: grid;
+        gap: 1.4rem;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      #work_history > .row:first-child,
+      #personal_projects > .row:first-child {
+        grid-column: 1 / -1;
+      }
+
+      #work_history > .row:not(:first-child),
+      .project-entry {
+        margin-bottom: 0;
+      }
+    }
+
+    @media only screen and (max-width: 549px) {
+      #about {
+        padding-top: 3rem;
+      }
+
+      #work_history,
+      #personal_projects {
+        padding-top: 2.8rem;
+      }
+
+      #work_history > .row:not(:first-child) {
+        gap: 1.2rem;
+        grid-template-columns: 64px minmax(0, 1fr);
+        padding: 1.5rem;
+      }
+
+      .project-entry {
+        grid-template-columns: 60px minmax(0, 1fr);
+        padding: 1.5rem;
+      }
+
+      .project-image {
+        margin-bottom: 0;
+      }
+    }
+  </style>
+</head>
+
+  <body>
+      <div id="particles-js">
+  <div class="content">
+      <h1>
+        <span class="site-title">Mark Kuczmarski</span>
+        <span class="site-description">Software Developer</span>
+      </h1>
+      <div class="hero-links">
+        <a target="_blank" rel="noopener noreferrer" href="https://github.com/kuczmama">GitHub</a>
+        <a href="resume.pdf">Resume</a>
+        <a href="https://www.youtube.com/channel/UCqLp0T6WBwxmuJdmo4mUW5A/featured" target="_blank" rel="noopener noreferrer">YouTube</a>
+      </div>
+  </div>
+  <a class="down" href="#about" aria-label="Scroll to About">↓</a>
+</div>
+
+      <section id="about">
+          <div class="container">
+  <nav class="section-nav" aria-label="Portfolio sections">
+    <a href='#about'>About</a>
+    <a href='#work_history'>Work History</a>
+    <a href='#personal_projects'>Projects</a>
+  </nav>
+  <div class="row">
+    <h2>About Me</h2>
+    <p>I'm a software developer from Cleveland, Ohio. After several years in the San Francisco Bay Area, I now live in Tokyo, Japan. I enjoy learning new things and helping others achieve their goals.</p>
+  </div>
+</div>
+
+      </section>
+      <div class='container'>
+        <section id='work_history'>
+          <!-- Work History -->
+  <div class="row">
+    <h2>Work History</h2>
+  </div>
+  <!-- Novacut -->
+    <div class='row work-history-entry'>
+      <div class='columns six'>
+        <img class='work-history-logo work-history-logo--square' src='assets/img/companies/novacut.png' alt='Novacut LLC logo'>
+      </div>
+      <div class='columns six'>
+        <p><b><big>Novacut LLC</big></b> <i>Founder</i><br>
+        Apr 2025 - Present · 1 yr 4 mos</p>
+        <p>
+          Building Novacut, an AI video editor that turns raw footage into editor-ready rough cuts.
+        </p>
+      </div>
+    </div>
+  <!-- / Novacut -->
+  <!-- South Bay Generative AI Meetup -->
+    <div class='row work-history-entry'>
+      <div class='columns six'>
+        <img class='work-history-logo work-history-logo--square' src='assets/img/companies/south-bay-genai.png' alt='South Bay Generative AI Meetup logo'>
+      </div>
+      <div class='columns six'>
+        <p><b><big>South Bay Generative AI Meetup</big></b> <i>Co-Organizer · Full-time</i><br>
+        Mar 2023 - Present · 3 yrs 5 mos</p>
+        <p class='work-history-details'>San Francisco Bay Area · On-site</p>
+        <p>
+          Co-organizer of the South Bay Generative AI Meetup, one of the largest GenAI meetups in the world.
+        </p>
+      </div>
+    </div>
+  <!-- / South Bay Generative AI Meetup -->
+  <!-- Amazon -->
+    <div class='row work-history-entry'>
+      <div class='columns six'>
+        <img class='work-history-logo' src='assets/img/companies/amazon.png' alt='Amazon logo'>
+      </div>
+      <div class='columns six'>
+        <p><b><big>Amazon</big></b> <i>Senior Software Development Engineer · Permanent</i><br>
+        Sep 2020 - Feb 2025 · 4 yrs 6 mos</p>
+        <p class='work-history-details'>Sunnyvale, California, United States</p>
+        <p>
+          Developed the Fire Tablet and Alexa integrations using Android, Java, and Kotlin.
+        </p>
+      </div>
+    </div>
+  <!-- / Amazon -->
+  <!-- SBI -->
+    <div class='row'>
+      <div class='columns six'>
+        <img src='assets/img/companies/sbi.svg' width='80%' height='100%' alt='SBI logo'>
+      </div>
+      <div class='columns six'>
+        <p><b><big>SBI</big></b> <i>Senior Frontend Developer</i><br>
+        Jul 2019 - Sep 2020</p>
+        <p>
+        Frontend developer working with a team of local and remote developers, 
+        building cryptocurrency software for financial services companies, 
+        using React, Javascript, and Java.
+        </p>
+      </div>
+    </div>
+  <!-- / SBI -->
+  <!-- Solairo -->
+  <div class='row'>
+    <div class='columns six'>
+    <img src='assets/img/companies/solairo.png' width='80%' height='100%' alt='Solairo logo'>
+    </div>
+    <div class='columns six'>
+      <p><b><big>Solairo</big></b> <i>Senior Software Developer</i><br>
+      Apr 2017 - Jul 2019</p>
+      <p>
+      B2B Chat application.  Used in major websites for customer support.
+      </p>
+      <ul>
+        <li>Worked on team of two</li>
+        <li>Created Single Page react SAAS Application with a rails backend</li>
+        <li>Used by ~30 companies</li>
+        <li>Rails 5 Backend, Typescript, React Frontend, ES6, Heroku, Cloudinary, Flux, Redux</li>
+      </ul>
+    </div>
+  </div>
+  <!-- / Solairo -->
+    <!--Answrly -->
+  <div class="row">
+    <div class="columns six">
+      <img src="assets/img/companies/Answrly_Dark.png" width='80%' height="100%" alt='Answrly logo'>
+    </div>
+    <div class="columns six">
+      <p><b><big>Answrly LLC</big></b> <i>Founder</i><br>
+      Jan 2016 — Feb 2017</p>
+      <p>
+      A website that you can go to to get your questions answered by professionals.
+      It's there to answer the questions you can't find on a search engine.
+      </p>
+      <ul>
+        <li>Created Everything</li>
+        <li>Ruby on Rails App.  Running on Amazon AWS.  Nginx. Capistrano.  Cofeescript.  Stripe.  Javascript.  Erb.</li>
+        <li>Handled marketing and managing company</li>
+      </ul>
+    </div>
+  </div>
+    <!-- End Answrly -->
+  <!--TCS -->
+  <div class="row">
+    <div class="columns six">
+      <img src="assets/img/companies/tata.jpeg" width='80%' height="100%" alt='Tata Consultancy Services logo'>
+    </div>
+    <div class="columns six">
+      <p><b><big>Tata Consultancy Services</big></b> <i>Software Engineer</i><br>
+      Jul 2015 — Apr 2017</p>
+      <ul>
+        <li>Wrote ASP MVC Applications</li>
+        <li>Worked on PowerShell scripts for major biomedical company</li> 
+        <li>Worked in team of 8</li>
+        <li>Dealt with Windows file permissions</li>
+        <li>Suported Concur, Kronos, AssureNET Softwares</li>
+        <li>Supported SQL Server</li>
+      </ul>
+    </div>
+  </div>
+    <!-- End TCS -->
+    <!-- Snapp Digital-->
+    <div class="row">
+      <div class="columns six">
+        <img src="assets/img/companies/snapp.png" width='80%' height="100%" alt='Snapp Digital logo'>
+      </div>
+      <div class="columns six">
+       <p><b><big>Snapp Digital</big></b> <i>Software Developer</i><br>
+        Jul 2015 — Dec 2015</p>
+        <ul>
+          <li>Coded critical piece of software to display advertisements</li>
+          <li>Used PHP, Javascript, JQuery, MAMP, HTML, CSS, S3, JSON, CURL</li>
+          <li>Developed restful API to track ad analytics.  Used Ruby on Rails, heroku, TDD, MVC, CURL</li>
+        </ul>
+    </div>
+  </div>
+    <!-- End Snapp Digital -->
+
+    <!-- Miami University-->
+    <div class="row">
+      <div class="columns six">
+        <img src="assets/img/companies/miami.jpeg" width='80%' height="100%" alt='Miami University logo'>
+      </div>
+      <div class="columns six">
+        <p><b><big>Miami University</big></b> <i>Resident Assistant</i><br>
+          Jul 2012 — Dec 2015</p>
+          <ul>
+            <li>Directly responsible for over 100 residents over 3 years.</li>
+            <li>Dealt with conflicts</li>
+            <li>Worked in team of 12</li>
+            <li>rganized events</li>
+          </ul>
+      </div>
+  </div>
+  <!-- Progressive Insurance-->
+    <div class="row">
+      <div class="columns six">
+        <img src="assets/img/companies/logo-progressive.png" width='80%' height="100%" alt='Progressive Insurance logo'>
+      </div>
+      <div class="columns six">
+     <p><b><big>Progressive Insurance</big></b> <i>Application Developer Intern</i><br>
+    
+        Jul 2014 — Jul 2014</p>
+    <ul>
+      <li>worked on the backend and front-end of Progressive.com</li> 
+      <li>working on automated scripts with FitNesse</li>
+      <li>C#/.NET, SASS, HTML, and CSS</li>
+      <li>sped up an internal application by over 4x</li>
+      <li>The application that I helped work on was an internal reporting tool that collected all of the errors in the system and display them. The displayed errors were logged into a database. Every time someone tried to query the database it could take up to a minute or longer to load all of the errors and display them on the screen. I was able to get the speed increases by implementing paging, changing data-structures, fixing multithreading issues, and eliminating a lot of wasted code. This resulted in a site that was faster and mobile responsive.</li>
+    </ul>
+   </div>
+  </div>
+
+   <!-- Ohio Dreams-->
+  <div class="row">
+    <div class="columns six">
+      <img src="assets/img/companies/ohiodreams.jpg" width='80%' height="100%" alt='Ohio Dreams logo'>
+    </div>
+    <div class="columns six">
+     <p><b><big>Ohio Dreams Action Sports Camp</big></b> <i>Camp Counselor | Lifeguard | Ski Coach</i><br>
+        May 2011 — Aug 2012</p>
+      <ul> 
+        <li>Eight week extreme sports overnight camp for ages 7 -17.</li>
+        <li>Responsible for 60 campers each week from all over the world.</li>
+        <li>Interacted with campers, parents, and professional athletes.</li>
+        <li>Assisted in coaching skiing.</li>
+        <li>Worked as lifeguard.</li>
+        <li>Worked at one of the only ski water ramps in the world.</li>
+      </ul>
+    </div>
+  </div>
+  <!-- End Ohio Dreams -->
+  <!-- Independence Pool -->
+  <div class="row">
+      <div class="columns six">
+        <img src="assets/img/companies/independence.png" width='80%' height="100%" alt='Independence Pool logo'>
+    </div>
+    <div class="columns six"> 
+       <p><b><big>Independence Pool</big></b> <i>Lifeguard</i><br>
+      May 2009 — Aug 2012</p>
+        <ul>
+          <li>Red Cross Certified</li>
+          <li>Water Safety Instructor Certified</li>
+          <li>Worked Outdoor / Indoor Pool</li>
+        </ul>
+    </div>
+  </div>
+  <!-- End Independence Pool -->
+  <!-- Freeport McMoran -->
+  <div class="row">
+      <div class="columns six">
+        <img src="assets/img/companies/fcx.jpeg" width='80%' height="100%" alt='Freeport-McMoRan logo'>
+    </div>
+    <div class="columns six"> 
+       <p><b><big>Freeport McMoran Copper &amp; Gold </big></b> <i>Process Control Intern</i><br>
+        Jul 2012 — Jul 2012</p>
+        <ul>
+          <li>Programmed a Allen Bradley PLC to automate a pump-house.</li>
+          <li>Promoted safety throughout the mine.</li> 
+          <li>Programmed in Ladder Logic.</li>
+        </ul>
+    </div>
+  </div>
+  <!-- End Freeport McMoran -->
+  <!-- Ohio Rep -->
+    <div class="row">
+      <div class="columns six">
+        <img src="assets/img/companies/ohiorep.png" width='80%' height="100%" alt='Ohio Represent logo'>
+      </div>
+      <div class="columns six">
+        <p><b><big>Ohio Represent T-Shirts</big></b> <i>Co-Owner and Founder</i><br> 
+      Jul 2010 — Jul 2011</p>
+      <ul>
+        <li>Co-Owner and founder of "Ohio Represent", a T-Shirt company that was made to promote Cleveland, Ohio. </li>
+        <li>Designed T-Shirt graphics </li>
+        <li>Screen printed with quality inc and t-shirts</li>
+        <li>Used professional equipment</li>
+        <li>Managed currency</li>
+        <li>Promoted company, developed brand strategy, web site traffic growth</li>
+        <li>Produced a profitable and successful business</li>
+      </ul>
+  </div>
+</div>
+<!-- End Ohio Rep -->
+<!-- BMBW -->
+<div class="row">
+      <div class="columns six">
+        <img src="assets/img/companies/bmbw.jpeg" width='75%' alt='Boston Mills and Brandywine logo'>
+      </div>
+      <div class="columns six">
+        <p><b><big>Boston Mills &amp; Brandywine</big></b> <i>Ski Instructor</i><br> 
+        December 2009 – February 2010</p>
+          <ul>
+            <li>Instructed groups and private lessons</li>
+            <li>Gave positive motivation and support</li>
+            <li>Taught in a professional manner</li>
+          </ul>
+      </div>
+    </div>
+<!-- End BMBW -->
+<!-- /Work History -->
+
+        </section>
+        <section id='personal_projects'>
+          <!-- Selected Projects -->
+<div class="row">
+  <h2>Past Projects</h2>
+  <p class="section-intro">A mix of shipped products, experiments, and earlier work. Archived projects are included to show the range of things I have built, even when the original service is no longer online.</p>
+</div>
+
+<article class="row project-entry">
+  <div class="columns three project-image">
+    <img src="assets/img/better-sticky-button.png" alt="Better Sticky Button product screenshot">
+  </div>
+  <div class="columns nine">
+    <span class="project-status">Archived</span>
+    <h3>Better Sticky Button</h3>
+    <p>A Shopify app built with Ruby on Rails that keeps a purchase button within reach as shoppers move through a product page.</p>
+  </div>
+</article>
+
+<article class="row project-entry">
+  <div class="columns three project-image">
+    <img src="assets/img/page-one.svg" alt="Page One project logo">
+  </div>
+  <div class="columns nine">
+    <span class="project-status">Archived</span>
+    <h3>Page One</h3>
+    <p>A book-discovery experiment that showed readers the first page before revealing the title and author.</p>
+  </div>
+</article>
+
+<article class="row project-entry">
+  <div class="columns three project-image">
+    <img src="assets/img/c50.png" alt="C50 Index project logo">
+  </div>
+  <div class="columns nine">
+    <span class="project-status">Archived</span>
+    <h3>C50 Index</h3>
+    <p>A cryptocurrency index concept designed to represent a diversified basket of 50 crypto assets in one token.</p>
+    <div class="project-links">
+      <a href="https://github.com/kuczmama/c50" target="_blank" rel="noopener noreferrer">View source on GitHub</a>
+    </div>
+  </div>
+</article>
+
+<article class="row project-entry">
+  <div class="columns three project-image">
+    <img src="assets/img/jolt.png" alt="Jolt Alarm Clock app icon">
+  </div>
+  <div class="columns nine">
+    <span class="project-status">Archived</span>
+    <h3>Jolt Alarm Clock</h3>
+    <p>A mobile alarm clock that paired a new electronic track with each morning alarm, supported by a Rails API.</p>
+  </div>
+</article>
+
+<article class="row project-entry">
+  <div class="columns three project-image">
+    <img src="assets/img/productloko.jpg" alt="Product Loko project artwork">
+  </div>
+  <div class="columns nine">
+    <span class="project-status">Archived</span>
+    <h3>Product Loko</h3>
+    <p>A business-idea generator with more than 10,000 combinations, built with Ruby on Rails.</p>
+  </div>
+</article>
+
+<article class="row project-entry">
+  <div class="columns three project-image">
+    <img src="assets/img/dotpopper.png" alt="Dot Popper game artwork">
+  </div>
+  <div class="columns nine">
+    <span class="project-status">Archived</span>
+    <h3>Dot Popper</h3>
+    <p>A cross-platform arcade game for Android and iOS, built in Java with LibGDX.</p>
+    <div class="project-links">
+      <a href="https://github.com/kuczmama/dot-popper" target="_blank" rel="noopener noreferrer">View source on GitHub</a>
+    </div>
+  </div>
+</article>
+
+<article class="row project-entry">
+  <div class="columns three project-image">
+    <img src="assets/img/travelscavengerhunt.png" alt="Travel Scavenger Hunt app artwork">
+  </div>
+  <div class="columns nine">
+    <span class="project-status">Archived</span>
+    <h3>Travel Scavenger Hunt</h3>
+    <p>A native Android road-trip game that turned family travel into a shared visual scavenger hunt.</p>
+  </div>
+</article>
+
+<article class="row project-entry">
+  <div class="columns three project-image">
+    <img src="assets/img/zombocalypse.png" alt="Zombocalypse game screenshot">
+  </div>
+  <div class="columns nine">
+    <span class="project-status">Archived</span>
+    <h3>Zombocalypse</h3>
+    <p>A Unity game built in C# for a game-design capstone, centered on defending a house from waves of zombies.</p>
+    <div class="project-links">
+      <a href="https://github.com/Fsmv/Zombocalypse/releases" target="_blank" rel="noopener noreferrer">View releases on GitHub</a>
+    </div>
+  </div>
+</article>
+
+<article class="row project-entry">
+  <div class="columns three project-image">
+    <img src="assets/img/frc.jpg" alt="Family Resource Center application screenshot">
+  </div>
+  <div class="columns nine">
+    <span class="project-status">Archived</span>
+    <h3>Family Resource Center Application</h3>
+    <p>A C# desktop application and SQL Server interface created to help a local nonprofit manage client records.</p>
+    <div class="project-links">
+      <a href="https://github.com/wardac/FRCApp" target="_blank" rel="noopener noreferrer">View source on GitHub</a>
+    </div>
+  </div>
+</article>
+<!-- /Selected Projects -->
+
+        </section>
+          
+      </div>
+<footer class="footer">
+    <p>&copy; Mark Kuczmarski</p>
+</footer>
+  </body>
+</html>
